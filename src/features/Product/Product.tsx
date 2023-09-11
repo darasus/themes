@@ -1,0 +1,47 @@
+import {z} from "zod"
+import {productSchema} from "@/lib/validation"
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card"
+import Image from "next/image"
+import {Badge} from "@/components/ui/badge"
+import {Button} from "@/components/ui/button"
+import {formatCents} from "@/lib/formatCents"
+
+interface Props {
+  product: z.infer<typeof productSchema>
+}
+
+export function Product({product}: Props) {
+  return (
+    <Card className="bg-white">
+      <CardHeader className="items-start">
+        {/* <div className="relative w-full aspect-square overflow-hidden mb-2">
+          <Image
+            src={
+              "https://images.unsplash.com/photo-1523275335684-37898b6baf30?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=3484&q=80"
+            }
+            alt={`Picture of ${product.title}`}
+            fill
+            style={{
+              objectFit: "cover",
+            }}
+            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+          />
+        </div> */}
+        <Badge>
+          {formatCents(Number(product.price) * 100, product.currency)}
+        </Badge>
+        <CardTitle>{product.title}</CardTitle>
+        <CardDescription>{product.description}</CardDescription>
+      </CardHeader>
+      <CardContent>
+        <Button className="w-full">Buy</Button>
+      </CardContent>
+    </Card>
+  )
+}
