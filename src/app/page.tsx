@@ -19,7 +19,11 @@ export default function Home() {
     <main className="p-4">
       <div className="flex flex-col gap-4">
         <PaylaForm
-          defaultValue={parseHash(window.location.hash) || undefined}
+          defaultValue={
+            typeof window !== "undefined"
+              ? parseHash(window.location.hash)
+              : undefined
+          }
           onUpdate={(value) => {
             setValue(value)
           }}

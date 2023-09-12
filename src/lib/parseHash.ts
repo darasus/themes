@@ -1,5 +1,5 @@
 import {productSchema} from "./validation"
-import {hash} from "../lib/hash"
+import {decode, encode} from "../lib/hash"
 
 export function parseHash(hashValue: string | undefined) {
   if (!hashValue) {
@@ -10,5 +10,27 @@ export function parseHash(hashValue: string | undefined) {
     hashValue.replace("#", "")
   }
 
-  return productSchema.parse(JSON.parse(hash.decode(hashValue)))
+  console.log(JSON.parse(decode(hashValue)))
+
+  return productSchema.parse({
+    title: "",
+    description: "",
+    amount: "0",
+    currency: "USD",
+    stripeAccountId: "",
+    ...JSON.parse(decode(hashValue)),
+  })
+}
+
+export function enrichHash(
+  hash: string | undefined,
+  data: Record<string, unknown>
+) {
+  if (!hash) {
+    return encode(JSON.stringify(data))
+  }
+
+  const decodedHash = JSON.parse(decode(hash))
+
+  return encode(JSON.stringify({...decodedHash, ...data}))
 }

@@ -11,6 +11,7 @@ import Image from "next/image"
 import {Badge} from "@/components/ui/badge"
 import {Button} from "@/components/ui/button"
 import {formatCents} from "@/lib/formatCents"
+import {BuyButton} from "../BuyButton/BuyButton"
 
 interface Props {
   product: z.infer<typeof productSchema>
@@ -34,13 +35,17 @@ export function Product({product}: Props) {
           />
         </div> */}
         <Badge>
-          {formatCents(Number(product.price) * 100, product.currency)}
+          {formatCents(Number(product.amount) * 100, product.currency)}
         </Badge>
         <CardTitle>{product.title}</CardTitle>
         <CardDescription>{product.description}</CardDescription>
       </CardHeader>
       <CardContent>
-        <Button className="w-full">Buy</Button>
+        <BuyButton
+          amount={product.amount}
+          currency={product.currency}
+          stripeAccountId={product.stripeAccountId}
+        />
       </CardContent>
     </Card>
   )

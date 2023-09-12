@@ -25,10 +25,11 @@ import {Textarea} from "@/components/ui/textarea"
 import {useEffect} from "react"
 import {productSchema} from "@/lib/validation"
 import {RadioGroup, RadioGroupItem} from "@/components/ui/radio-group"
+import {LinkStripeAccountButton} from "./features/LinkStripeAccountButton/LinkStripeAccountButton"
 
 interface Props {
   onUpdate: (value: string) => void
-  defaultValue?: z.infer<typeof productSchema>
+  defaultValue?: z.infer<typeof productSchema> | null
 }
 
 export function PaylaForm({onUpdate, defaultValue}: Props) {
@@ -37,8 +38,9 @@ export function PaylaForm({onUpdate, defaultValue}: Props) {
     defaultValues: defaultValue ?? {
       title: "",
       description: "",
-      price: "0",
+      amount: "0",
       currency: "USD",
+      stripeAccountId: "",
     },
   })
 
@@ -66,6 +68,25 @@ export function PaylaForm({onUpdate, defaultValue}: Props) {
       <CardContent>
         <Form {...form}>
           <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
+            <FormField
+              control={form.control}
+              name="stripeAccountId"
+              render={({field}) => (
+                <FormItem>
+                  <FormLabel>Stripe account ID</FormLabel>
+                  <div className="flex gap-2">
+                    <FormControl>
+                      <Input {...field} disabled />
+                    </FormControl>
+                    <LinkStripeAccountButton />
+                  </div>
+                  <FormDescription>
+                    This is public title of your product.
+                  </FormDescription>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
             <FormField
               control={form.control}
               name="title"
@@ -100,7 +121,7 @@ export function PaylaForm({onUpdate, defaultValue}: Props) {
             />
             <FormField
               control={form.control}
-              name="price"
+              name="amount"
               render={({field}) => (
                 <FormItem>
                   <FormLabel>Price</FormLabel>

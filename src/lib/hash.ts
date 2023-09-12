@@ -6,7 +6,7 @@ if (typeof window !== "undefined" && window.crypto) {
   crypto = require("crypto").webcrypto
 }
 
-function encode(input: string): string {
+export function encode(input: string): string {
   if (typeof Buffer !== "undefined") {
     return Buffer.from(input).toString("base64")
   }
@@ -18,7 +18,7 @@ function encode(input: string): string {
   return ""
 }
 
-function decode(input: string): string {
+export function decode(input: string): string {
   if (typeof Buffer !== "undefined") {
     return Buffer.from(decodeURIComponent(input), "base64").toString()
   }
@@ -28,9 +28,4 @@ function decode(input: string): string {
   }
 
   return ""
-}
-
-export const hash = {
-  encode,
-  decode,
 }
