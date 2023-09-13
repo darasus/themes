@@ -11,6 +11,7 @@ import {
   DialogTrigger,
 } from "@/components/ui/dialog"
 import {Checkout} from "../Checkout/Checkout"
+import {formatCents} from "@/lib/formatCents"
 
 interface Props {
   amount: string
@@ -18,11 +19,14 @@ interface Props {
   currency: Currency
 }
 
-export function BuyButton(props: Props) {
+export function BuyButton({amount, currency, stripeAccountId}: Props) {
   return (
     <Dialog>
       <DialogTrigger asChild>
-        <Button className="w-full">Buy</Button>
+        <Button className="w-full">{`Buy for ${formatCents(
+          Number(amount) * 100,
+          currency
+        )}`}</Button>
       </DialogTrigger>
       <DialogContent>
         <DialogHeader>
@@ -32,9 +36,9 @@ export function BuyButton(props: Props) {
           </DialogDescription>
         </DialogHeader>
         <Checkout
-          amount={Number(props.amount) * 100}
-          currency={props.currency}
-          stripeAccountId={props.stripeAccountId}
+          amount={Number(amount) * 100}
+          currency={currency}
+          stripeAccountId={stripeAccountId}
         />
       </DialogContent>
     </Dialog>

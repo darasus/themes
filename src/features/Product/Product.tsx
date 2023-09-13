@@ -8,9 +8,6 @@ import {
   CardTitle,
 } from "@/components/ui/card"
 import Image from "next/image"
-import {Badge} from "@/components/ui/badge"
-import {Button} from "@/components/ui/button"
-import {formatCents} from "@/lib/formatCents"
 import {BuyButton} from "../BuyButton/BuyButton"
 
 interface Props {
@@ -34,9 +31,6 @@ export function Product({product}: Props) {
             sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
           />
         </div> */}
-        <Badge>
-          {formatCents(Number(product.amount) * 100, product.currency)}
-        </Badge>
         <CardTitle>{product.title}</CardTitle>
         <CardDescription>{product.description}</CardDescription>
       </CardHeader>
