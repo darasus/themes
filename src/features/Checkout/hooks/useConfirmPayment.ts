@@ -1,4 +1,3 @@
-import {getBaseUrl} from "@/lib/utils"
 import {useElements, useStripe} from "@stripe/react-stripe-js"
 import {FormEvent, useState} from "react"
 
@@ -21,20 +20,7 @@ export function useConfirmPayment() {
     const {error} = await stripe.confirmPayment({
       elements,
       confirmParams: {
-        return_url: getBaseUrl(),
-        // receipt_email: email,
-        // shipping: {
-        //   address: {
-        //     city: "NY",
-        //     line1: "123 Main St",
-        //   },
-        //   name: "Shipping user",
-        // },
-        // payment_method_data: {
-        //   billing_details: {
-        //     name: "Billing user",
-        //   },
-        // },
+        return_url: window.location.href,
       },
     })
 
