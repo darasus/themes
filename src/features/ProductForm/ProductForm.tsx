@@ -32,7 +32,7 @@ interface Props {
   defaultValue?: z.infer<typeof productSchema> | null
 }
 
-export function PaylaForm({onUpdate, defaultValue}: Props) {
+export function ProductForm({onUpdate, defaultValue}: Props) {
   const form = useForm<z.infer<typeof productSchema>>({
     resolver: zodResolver(productSchema),
     defaultValues: defaultValue ?? {

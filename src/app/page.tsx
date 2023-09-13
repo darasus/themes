@@ -1,6 +1,7 @@
 "use client"
 
-import {PaylaForm} from "@/features/PaylaForm/PaylaForm"
+import {Logo} from "@/features/Logo/Logo"
+import {ProductForm} from "@/features/ProductForm/ProductForm"
 import {UrlPreview} from "@/features/UrlPreview/UrlPreview"
 import {parseHash} from "@/lib/parseHash"
 import {getBaseUrl} from "@/lib/utils"
@@ -16,20 +17,28 @@ export default function Home() {
   }, [value])
 
   return (
-    <main className="p-4">
-      <div className="flex flex-col gap-4">
-        <PaylaForm
-          defaultValue={
-            typeof window !== "undefined"
-              ? parseHash(window.location.hash)
-              : undefined
-          }
-          onUpdate={(value) => {
-            setValue(value)
-          }}
-        />
-        <UrlPreview url={`${getBaseUrl()}/${btoa(value)}`} />
-      </div>
-    </main>
+    <>
+      <header className="flex flex-col items-center gap-6 py-10">
+        <Logo />
+        <span className="text-xl font-semibold">
+          Simplest and quickest way to sell online
+        </span>
+      </header>
+      <main className="p-4">
+        <div className="flex flex-col gap-4 max-w-lg m-auto">
+          <ProductForm
+            defaultValue={
+              typeof window !== "undefined"
+                ? parseHash(window.location.hash)
+                : undefined
+            }
+            onUpdate={(value) => {
+              setValue(value)
+            }}
+          />
+          <UrlPreview url={`${getBaseUrl()}/${btoa(value)}`} />
+        </div>
+      </main>
+    </>
   )
 }

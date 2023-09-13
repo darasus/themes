@@ -1,10 +1,8 @@
-"use client"
-
 import {BuiltWithPayla} from "@/features/BuiltWithPayla/BuiltWithPayla"
 import {Product} from "@/features/Product/Product"
 import {parseHash} from "@/lib/parseHash"
 
-export default function ProductPage({
+export default async function ProductPage({
   params,
 }: {
   params: {
