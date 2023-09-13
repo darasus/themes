@@ -31,8 +31,6 @@ export async function linkStripeAccount({hash}: LinkStripeAccountArgs) {
     },
   })}`
 
-  console.log({returnUrl})
-
   const accountLink = await stripe.accountLinks.create({
     account: account.id,
     refresh_url: returnUrl,

@@ -10,8 +10,6 @@ export function parseHash(hashValue: string | undefined) {
     hashValue.replace("#", "")
   }
 
-  console.log(JSON.parse(decode(hashValue)))
-
   return productSchema.parse({
     title: "",
     description: "",

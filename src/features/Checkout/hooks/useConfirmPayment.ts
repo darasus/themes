@@ -12,8 +12,7 @@ export function useConfirmPayment() {
     e.preventDefault()
 
     if (!stripe || !elements) {
-      console.log("not loaded")
-      // Stripe.js has not yet loaded.
+      console.error("Stripe.js has not yet loaded.")
       return
     }
 
