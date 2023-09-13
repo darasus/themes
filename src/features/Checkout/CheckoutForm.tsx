@@ -28,7 +28,6 @@ export function CheckoutForm({paymentIntentId, clientSecret, amount}: Props) {
       className="flex flex-col gap-2"
     >
       <LinkAuthenticationElement />
-      <div className="border-b" />
       <AddressElement
         options={{
           mode: "shipping",

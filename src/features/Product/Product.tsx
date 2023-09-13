@@ -16,7 +16,7 @@ interface Props {
 
 export function Product({product}: Props) {
   return (
-    <Card className="bg-white">
+    <Card>
       <CardHeader className="items-start">
         {/* <div className="relative w-full aspect-square overflow-hidden mb-2">
           <Image

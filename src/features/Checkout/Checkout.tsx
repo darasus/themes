@@ -3,10 +3,11 @@
 import {Button} from "@/components/ui/button"
 import {createPaymentIntent} from "@/lib/actions"
 import {Currency} from "@/types"
-import {useEffect, useState} from "react"
+import {useEffect, useLayoutEffect, useRef, useState} from "react"
 import {CheckoutForm} from "../Checkout/CheckoutForm"
 import {Elements} from "@stripe/react-stripe-js"
-import {loadStripe, Stripe} from "@stripe/stripe-js"
+import {Appearance, loadStripe, Stripe} from "@stripe/stripe-js"
+import {useTheme} from "next-themes"
 
 interface Props {
   amount: number
@@ -15,6 +16,9 @@ interface Props {
 }
 
 export function Checkout(props: Props) {
+  const {resolvedTheme} = useTheme()
+  const root = useRef(document.documentElement)
+  const [variables, setVariables] = useState<Appearance["variables"]>({})
   const [stripe, setStripe] = useState<Stripe | null>(null)
   const [clientSecret, setClientSecret] = useState<string | null>(null)
   const [paymentIntentId, setPaymentIntentId] = useState<string | null>(null)
@@ -36,6 +40,32 @@ export function Checkout(props: Props) {
     })
   }, [props])
 
+  useLayoutEffect(() => {
+    const radius = getComputedStyle(root.current).getPropertyValue("--radius")
+    const background = getComputedStyle(root.current)
+      .getPropertyValue("--background")
+      .split(" ")
+      .join(", ")
+    const foreground = getComputedStyle(root.current)
+      .getPropertyValue("--foreground")
+      .split(" ")
+      .join(", ")
+    const primary = getComputedStyle(root.current)
+      .getPropertyValue("--primary")
+      .split(" ")
+      .join(", ")
+
+    setVariables((prevState) => {
+      return {
+        ...prevState,
+        borderRadius: radius,
+        colorBackground: `hsl(${background})`,
+        colorText: `hsl(${foreground})`,
+        colorPrimary: `hsl(${primary})`,
+      }
+    })
+  }, [resolvedTheme])
+
   return (
     <>
       {isLoading && <div>Loading...</div>}
@@ -44,8 +74,7 @@ export function Checkout(props: Props) {
           options={{
             clientSecret,
             appearance: {
-              theme: "stripe",
-              labels: "floating",
+              variables,
             },
           }}
           stripe={stripe}

@@ -3,7 +3,6 @@ import {BuiltWithPayla} from "@/features/BuiltWithPayla/BuiltWithPayla"
 import {Product} from "@/features/Product/Product"
 import {fetchBranding} from "@/lib/actions"
 import {parseHash} from "@/lib/parseHash"
-import Image from "next/image"
 
 export default async function ProductPage({
   params,
