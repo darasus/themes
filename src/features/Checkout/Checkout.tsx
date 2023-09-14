@@ -80,11 +80,7 @@ export function Checkout(props: Props) {
           }}
           stripe={stripe}
         >
-          <CheckoutForm
-            paymentIntentId={paymentIntentId}
-            clientSecret={clientSecret}
-            amount={Number(props.amount) * 100}
-          />
+          <CheckoutForm />
         </Elements>
       )}
     </>

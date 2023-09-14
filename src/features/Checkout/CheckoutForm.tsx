@@ -10,13 +10,7 @@ import {
 import {Button} from "@/components/ui/button"
 import {useConfirmPayment} from "./hooks/useConfirmPayment"
 
-interface Props {
-  paymentIntentId: string
-  clientSecret: string
-  amount: number
-}
-
-export function CheckoutForm({paymentIntentId, clientSecret, amount}: Props) {
+export function CheckoutForm() {
   const stripe = useStripe()
   const elements = useElements()
   const {error, handleSubmit, isLoading} = useConfirmPayment()
@@ -28,6 +22,7 @@ export function CheckoutForm({paymentIntentId, clientSecret, amount}: Props) {
       className="flex flex-col gap-2"
     >
       <LinkAuthenticationElement />
+      <div className="border-b my-4" />
       <AddressElement
         options={{
           mode: "shipping",
@@ -36,6 +31,7 @@ export function CheckoutForm({paymentIntentId, clientSecret, amount}: Props) {
           },
         }}
       />
+      <div className="border-b my-4" />
       <PaymentElement id="payment-element" />
       <Button
         className="w-full mt-2"
