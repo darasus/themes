@@ -63,6 +63,8 @@ export function Checkout(props: Props) {
         colorText: `hsl(${foreground})`,
         colorPrimary: `hsl(${primary})`,
         fontFamily: '"Inter", sans-serif',
+        fontWeightNormal: "600",
+        fontSizeSm: "0.875rem",
       }
     })
   }, [resolvedTheme])
@@ -76,6 +78,15 @@ export function Checkout(props: Props) {
             clientSecret,
             appearance: {
               variables,
+              rules: {
+                ".Label": {
+                  marginBottom: `0.5rem`,
+                },
+                ".Input::placeholder": {
+                  fontWeight: "normal",
+                  fontSize: "0.875rem",
+                },
+              },
             },
           }}
           stripe={stripe}
