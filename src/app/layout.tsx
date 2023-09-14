@@ -1,9 +1,7 @@
 import {ThemeProvider} from "@/components/theme-provider"
 import "./global.css"
 import type {Metadata} from "next"
-import {Inter} from "next/font/google"
-
-const inter = Inter({subsets: ["latin"]})
+import {bodyFont} from "@/lib/fonts"
 
 export const metadata: Metadata = {
   title: "Payla",
@@ -13,7 +11,7 @@ export const metadata: Metadata = {
 export default function RootLayout({children}: {children: React.ReactNode}) {
   return (
     <html lang="en" suppressHydrationWarning>
-      <body className={inter.className}>
+      <body className={bodyFont.className}>
         <ThemeProvider>
           <div className="p-4">{children}</div>
         </ThemeProvider>

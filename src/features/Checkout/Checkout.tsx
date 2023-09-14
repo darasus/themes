@@ -62,6 +62,7 @@ export function Checkout(props: Props) {
         colorBackground: `hsl(${background})`,
         colorText: `hsl(${foreground})`,
         colorPrimary: `hsl(${primary})`,
+        fontFamily: '"Inter", sans-serif',
       }
     })
   }, [resolvedTheme])
