@@ -3,7 +3,7 @@ import {Card, CardContent, CardHeader, CardTitle} from "@/components/ui/card"
 import {BuiltWithPayla} from "@/features/BuiltWithPayla/BuiltWithPayla"
 import {Product} from "@/features/Product/Product"
 import {fetchBranding} from "@/lib/actions"
-import {parseHash} from "@/lib/parseHash"
+import {parseHash} from "@/lib/hash"
 import {notFound} from "next/navigation"
 
 export default async function ProductPage({
@@ -18,7 +18,8 @@ export default async function ProductPage({
   }
 }) {
   const isSuccess = searchParams.redirect_status === "succeeded"
-  const product = parseHash(params.hash)
+  console.log(params.hash)
+  const product = parseHash(params.hash)?.state.values
 
   if (!product) {
     notFound()
@@ -27,7 +28,7 @@ export default async function ProductPage({
   const branding = await fetchBranding(product?.stripeAccountId)
 
   return (
-    <div>
+    <div className="p-4">
       <div className="flex flex-col gap-4 m-auto max-w-md">
         <div className="flex items-center justify-center gap-2">
           <Avatar>

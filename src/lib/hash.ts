@@ -1,3 +1,6 @@
+import {productSchema} from "./validation"
+import {z} from "zod"
+
 let crypto: Crypto
 
 if (typeof window !== "undefined" && window.crypto) {
@@ -28,4 +31,56 @@ export function decode(input: string): string {
   }
 
   return ""
+}
+
+const query = z.object({
+  state: z.object({
+    values: productSchema,
+  }),
+})
+
+export function parseHash(hashValue: string | undefined | null) {
+  if (!hashValue) {
+    return null
+  }
+
+  try {
+    return query.parse({
+      title: "",
+      description: "",
+      amount: "0",
+      currency: "USD",
+      stripeAccountId: "",
+      imageSrc: "",
+      ...JSON.parse(decode(hashValue)),
+    })
+  } catch (error) {
+    console.log(error)
+    return null
+  }
+}
+
+export function enrichHash(
+  hash: string | undefined,
+  data: Record<string, unknown>
+) {
+  if (!hash) {
+    return encode(JSON.stringify(data))
+  }
+
+  let decodedHash = parseHash(hash)
+  decodedHash?.state.values
+
+  return encode(
+    JSON.stringify({
+      ...decodedHash,
+      state: {
+        ...decodedHash?.state,
+        values: {
+          ...decodedHash?.state.values,
+          ...data,
+        },
+      },
+    })
+  )
 }

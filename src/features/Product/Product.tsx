@@ -7,8 +7,8 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card"
-import Image from "next/image"
 import {BuyButton} from "../BuyButton/BuyButton"
+import Image from "next/image"
 
 interface Props {
   product: z.infer<typeof productSchema>
@@ -18,11 +18,9 @@ export function Product({product}: Props) {
   return (
     <Card>
       <CardHeader className="items-start">
-        {/* <div className="relative w-full aspect-square overflow-hidden mb-2">
+        <div className="relative w-full aspect-square overflow-hidden mb-2">
           <Image
-            src={
-              "https://images.unsplash.com/photo-1523275335684-37898b6baf30?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=3484&q=80"
-            }
+            src={product.imageSrc}
             alt={`Picture of ${product.title}`}
             fill
             style={{
@@ -30,7 +28,7 @@ export function Product({product}: Props) {
             }}
             sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
           />
-        </div> */}
+        </div>
         <CardTitle>{product.title}</CardTitle>
         <CardDescription>{product.description}</CardDescription>
       </CardHeader>

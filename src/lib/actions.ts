@@ -3,9 +3,9 @@
 import {redirect} from "next/navigation"
 import {Stripe} from "stripe"
 import {getBaseUrl} from "./utils"
-import {enrichHash} from "./parseHash"
 import sharp from "sharp"
 import {unstable_cache} from "next/cache"
+import {enrichHash} from "./hash"
 
 function createStripe(stripeAccountId?: string) {
   return new Stripe(process.env.STRIPE_API_SECRET!, {
@@ -25,12 +25,8 @@ export async function linkStripeAccount({hash}: LinkStripeAccountArgs) {
     type: "standard",
   })
 
-  const returnUrl = `${getBaseUrl()}/#${enrichHash(hash, {
+  const returnUrl = `${getBaseUrl()}/create?form=${enrichHash(hash, {
     stripeAccountId: account.id,
-    capabilities: {
-      card_payments: {requested: true},
-      transfers: {requested: true},
-    },
   })}`
 
   const accountLink = await stripe.accountLinks.create({

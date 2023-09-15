@@ -1,43 +1,25 @@
 "use client"
 
+import {Button} from "@/components/ui/button"
 import {Logo} from "@/features/Logo/Logo"
-import {ProductForm} from "@/features/ProductForm/ProductForm"
-import {UrlPreview} from "@/features/UrlPreview/UrlPreview"
-import {parseHash} from "@/lib/parseHash"
-import {getBaseUrl} from "@/lib/utils"
-import {useEffect, useState} from "react"
+import Link from "next/link"
 
 export default function Home() {
-  const [value, setValue] = useState<string>("")
-
-  useEffect(() => {
-    if (typeof window !== "undefined") {
-      window.location.hash = btoa(value)
-    }
-  }, [value])
-
   return (
     <>
-      <header className="flex flex-col items-center gap-6 py-10">
+      <main className="flex flex-col justify-center items-center gap-6 h-screen px-4">
         <Logo />
-        <span className="text-xl font-semibold">
-          Simplest and quickest way to sell online
+        <span className="text-xl font-medium text-center">
+          Simplest and quickest way to sell online. It literally takes{" "}
+          <span className="underline">seconds</span>.
+          <span className="text-muted">*</span>
         </span>
-      </header>
-      <main className="p-4">
-        <div className="flex flex-col gap-4 max-w-lg m-auto">
-          <ProductForm
-            defaultValue={
-              typeof window !== "undefined"
-                ? parseHash(window.location.hash)
-                : undefined
-            }
-            onUpdate={(value) => {
-              setValue(value)
-            }}
-          />
-          <UrlPreview url={`${getBaseUrl()}/${btoa(value)}`} />
-        </div>
+        <Button size="lg" asChild>
+          <Link href={"/create"}>Start selling</Link>
+        </Button>
+        <span className="text-muted">
+          * if you already have Stripe account.
+        </span>
       </main>
     </>
   )

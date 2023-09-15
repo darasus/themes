@@ -1,6 +1,5 @@
 "use client"
 
-import {Button} from "@/components/ui/button"
 import {createPaymentIntent} from "@/lib/actions"
 import {Currency} from "@/types"
 import {useEffect, useLayoutEffect, useRef, useState} from "react"

@@ -1,13 +1,16 @@
 import {Button} from "@/components/ui/button"
 import {linkStripeAccount} from "@/lib/actions"
 
-export function LinkStripeAccountButton() {
+interface Props {
+  hash: string
+}
+
+export function LinkStripeAccountButton({hash}: Props) {
   return (
     <Button
       onClick={async () => {
-        linkStripeAccount({
-          hash:
-            typeof window !== "undefined" ? window.location.hash : undefined,
+        await linkStripeAccount({
+          hash,
         })
       }}
       className="shrink-0"
