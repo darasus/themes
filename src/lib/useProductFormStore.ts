@@ -43,6 +43,7 @@ export const useProductFormStore = create<State>()(
         description: "",
         title: "",
         imageSrc: "",
+        successMessage: "",
       },
       update: (values) => {
         return set((state) => ({values: {...state.values, ...values}}))

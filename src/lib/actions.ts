@@ -6,6 +6,10 @@ import {getBaseUrl} from "./utils"
 import sharp from "sharp"
 import {unstable_cache} from "next/cache"
 import {enrichHash} from "./hash"
+import {kv} from "@vercel/kv"
+import {init} from "@paralleldrive/cuid2"
+import {productSchema} from "./validation"
+import {z} from "zod"
 
 function createStripe(stripeAccountId?: string) {
   return new Stripe(process.env.STRIPE_API_SECRET!, {
@@ -104,4 +108,23 @@ export async function fetchBranding(stripeAccountId: string) {
       revalidate: false,
     }
   )()
+}
+
+const createId = init({
+  length: 6,
+})
+
+export async function saveProduct(values: z.infer<typeof productSchema>) {
+  const id = createId()
+  await kv.set<z.infer<typeof productSchema>>(id, values, {
+    ex: 60 * 60 * 24 * 365 * 10, // 10 years
+  })
+
+  return {id}
+}
+
+export async function getProduct(id: string) {
+  const data = await kv.get<z.infer<typeof productSchema>>(id)
+
+  return data
 }

@@ -1,25 +1,21 @@
 import {Avatar, AvatarFallback, AvatarImage} from "@/components/ui/avatar"
-import {Card, CardContent, CardHeader, CardTitle} from "@/components/ui/card"
 import {BuiltWithPayla} from "@/features/BuiltWithPayla/BuiltWithPayla"
 import {Product} from "@/features/Product/Product"
-import {fetchBranding} from "@/lib/actions"
-import {parseHash} from "@/lib/hash"
+import {fetchBranding, getProduct} from "@/lib/actions"
 import {notFound} from "next/navigation"
 
 export default async function ProductPage({
   params,
-  searchParams,
 }: {
   params: {
-    hash: string | undefined
-  }
-  searchParams: {
-    redirect_status: string | undefined
+    id: string | undefined
   }
 }) {
-  const isSuccess = searchParams.redirect_status === "succeeded"
-  console.log(params.hash)
-  const product = parseHash(params.hash)?.state.values
+  if (!params.id) {
+    notFound()
+  }
+
+  const product = await getProduct(params.id)
 
   if (!product) {
     notFound()
@@ -40,15 +36,15 @@ export default async function ProductPage({
           </Avatar>
           <span className="text-lg">{branding.name}</span>
         </div>
-        {isSuccess && (
+        {/* {isSuccess && (
           <Card>
             <CardHeader>
               <CardTitle>Your purchase is successful!</CardTitle>
             </CardHeader>
             <CardContent>{product.description}</CardContent>
           </Card>
-        )}
-        {!isSuccess && <Product product={product} />}
+        )}*/}
+        <Product product={product} />
         <BuiltWithPayla />
       </div>
     </div>

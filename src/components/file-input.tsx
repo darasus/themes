@@ -64,6 +64,7 @@ export function FileInput({value, onChange}: Props) {
               onClick={(e) => {
                 e.preventDefault()
               }}
+              type="button"
             >
               Select file
             </Button>
@@ -96,6 +97,7 @@ export function FileInput({value, onChange}: Props) {
             size="sm"
             className="absolute bottom-5 right-5 z-50"
             onClick={handleRemoveImage}
+            type="button"
           >
             Remove
           </Button>

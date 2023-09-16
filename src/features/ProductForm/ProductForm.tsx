@@ -2,7 +2,7 @@
 
 import {zodResolver} from "@hookform/resolvers/zod"
 import {z} from "zod"
-import {useForm, useWatch} from "react-hook-form"
+import {useForm, useFormState, useWatch} from "react-hook-form"
 import {
   Form,
   FormControl,
@@ -16,6 +16,7 @@ import {
   Card,
   CardContent,
   CardDescription,
+  CardFooter,
   CardHeader,
   CardTitle,
 } from "@/components/ui/card"
@@ -25,22 +26,30 @@ import {RadioGroup, RadioGroupItem} from "@/components/ui/radio-group"
 import {LinkStripeAccountButton} from "./features/LinkStripeAccountButton/LinkStripeAccountButton"
 import {FileInput} from "@/components/file-input"
 import {useProductFormStore} from "@/lib/useProductFormStore"
-import {useEffect} from "react"
+import {useEffect, useState} from "react"
 import {encode} from "@/lib/hash"
+import {currencyMap} from "@/constants"
+import {Button} from "@/components/ui/button"
 import {getBaseUrl} from "@/lib/utils"
+import {saveProduct} from "@/lib/actions"
 
 interface Props {
   initialData?: z.infer<typeof productSchema> | undefined | null
 }
 
 export function ProductForm({initialData}: Props) {
+  const [id, setId] = useState("")
   const {update, values: defaultValues} = useProductFormStore()
   const form = useForm<z.infer<typeof productSchema>>({
     resolver: zodResolver(productSchema),
     defaultValues: initialData || defaultValues,
   })
+  const formState = useFormState({control: form.control})
 
-  function onSubmit(values: z.infer<typeof productSchema>) {}
+  async function onSubmit(values: z.infer<typeof productSchema>) {
+    const {id} = await saveProduct(values)
+    setId(id)
+  }
 
   const values = useWatch({
     control: form.control,
@@ -49,10 +58,6 @@ export function ProductForm({initialData}: Props) {
   useEffect(() => {
     update(values)
   }, [values, update])
-
-  const url = `${getBaseUrl()}/p/${encode(
-    JSON.stringify({state: {values: defaultValues}})
-  )}`
 
   return (
     <div className="flex flex-col gap-4">
@@ -77,6 +82,9 @@ export function ProductForm({initialData}: Props) {
                         <Input {...field} disabled />
                       </FormControl>
                       <LinkStripeAccountButton
+                        unlink={() => {
+                          form.setValue("stripeAccountId", "")
+                        }}
                         hash={encode(
                           JSON.stringify({state: {values: defaultValues}})
                         )}
@@ -136,7 +144,11 @@ export function ProductForm({initialData}: Props) {
                 name="amount"
                 render={({field}) => (
                   <FormItem>
-                    <FormLabel>Price</FormLabel>
+                    <FormLabel>
+                      {values.currency
+                        ? `Price in ${currencyMap[values.currency]}`
+                        : "Price"}
+                    </FormLabel>
                     <FormControl>
                       <Input {...field} type="number" />
                     </FormControl>
@@ -180,18 +192,38 @@ export function ProductForm({initialData}: Props) {
                   </FormItem>
                 )}
               />
+              <FormField
+                control={form.control}
+                name="successMessage"
+                render={({field}) => (
+                  <FormItem>
+                    <FormLabel>Success message</FormLabel>
+                    <FormControl>
+                      <Textarea {...field} />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
             </Form>
           </CardContent>
-          {/* <CardFooter>
-          <Button type="submit">Generate link</Button>
-        </CardFooter> */}
+          <CardFooter>
+            <Button
+              type="submit"
+              disabled={formState.isSubmitted && !formState.isDirty}
+            >
+              Generate link
+            </Button>
+          </CardFooter>
         </Card>
       </form>
-      <div className="bg-muted p-4 rounded-lg truncate">
-        <a href={url} className="underline">
-          {url}
-        </a>
-      </div>
+      {id && (
+        <div className="bg-muted p-4 rounded-lg truncate">
+          <a href={`${getBaseUrl()}/p/${id}`} className="underline">
+            {`${getBaseUrl()}/p/${id}`}
+          </a>
+        </div>
+      )}
     </div>
   )
 }

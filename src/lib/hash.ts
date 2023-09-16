@@ -1,4 +1,4 @@
-import {productSchema} from "./validation"
+import {hashSchema} from "./validation"
 import {z} from "zod"
 
 let crypto: Crypto
@@ -35,7 +35,7 @@ export function decode(input: string): string {
 
 const query = z.object({
   state: z.object({
-    values: productSchema,
+    values: hashSchema,
   }),
 })
 
@@ -55,7 +55,6 @@ export function parseHash(hashValue: string | undefined | null) {
       ...JSON.parse(decode(hashValue)),
     })
   } catch (error) {
-    console.log(error)
     return null
   }
 }
