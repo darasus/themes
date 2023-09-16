@@ -1,7 +1,8 @@
+import {getBaseUrl} from "@/lib/utils"
 import {useElements, useStripe} from "@stripe/react-stripe-js"
 import {FormEvent, useState} from "react"
 
-export function useConfirmPayment() {
+export function useConfirmPayment({productId}: {productId: string}) {
   const [error, setError] = useState("")
   const [isLoading, setIsLoading] = useState(false)
   const stripe = useStripe()
@@ -20,7 +21,7 @@ export function useConfirmPayment() {
     const {error} = await stripe.confirmPayment({
       elements,
       confirmParams: {
-        return_url: window.location.href,
+        return_url: `${getBaseUrl()}/p/${productId}/success`,
       },
     })
 

@@ -17,9 +17,15 @@ interface Props {
   amount: string
   stripeAccountId: string
   currency: Currency
+  productId: string
 }
 
-export function BuyButton({amount, currency, stripeAccountId}: Props) {
+export function BuyButton({
+  amount,
+  currency,
+  stripeAccountId,
+  productId,
+}: Props) {
   return (
     <Dialog>
       <DialogTrigger asChild>
@@ -36,6 +42,7 @@ export function BuyButton({amount, currency, stripeAccountId}: Props) {
           </DialogDescription>
         </DialogHeader>
         <Checkout
+          productId={productId}
           amount={Number(amount) * 100}
           currency={currency}
           stripeAccountId={stripeAccountId}

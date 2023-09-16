@@ -11,6 +11,7 @@ import {useTheme} from "next-themes"
 interface Props {
   amount: number
   stripeAccountId: string
+  productId: string
   currency: Currency
 }
 
@@ -90,7 +91,7 @@ export function Checkout(props: Props) {
           }}
           stripe={stripe}
         >
-          <CheckoutForm />
+          <CheckoutForm productId={props.productId} />
         </Elements>
       )}
     </>

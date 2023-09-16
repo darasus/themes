@@ -1,10 +1,10 @@
 import {Avatar, AvatarFallback, AvatarImage} from "@/components/ui/avatar"
+import {Card, CardContent, CardHeader, CardTitle} from "@/components/ui/card"
 import {BuiltWithPayla} from "@/features/BuiltWithPayla/BuiltWithPayla"
-import {Product} from "@/features/Product/Product"
 import {fetchBranding, getProduct} from "@/lib/actions"
 import {notFound} from "next/navigation"
 
-export default async function ProductPage({
+export default async function CheckoutSuccessPage({
   params,
 }: {
   params: {
@@ -36,15 +36,12 @@ export default async function ProductPage({
           </Avatar>
           <span className="text-lg">{branding.name}</span>
         </div>
-        {/* {isSuccess && (
-          <Card>
-            <CardHeader>
-              <CardTitle>Your purchase is successful!</CardTitle>
-            </CardHeader>
-            <CardContent>{product.description}</CardContent>
-          </Card>
-        )}*/}
-        <Product product={product} productId={params.id} />
+        <Card>
+          <CardHeader>
+            <CardTitle>Your purchase is successful!</CardTitle>
+          </CardHeader>
+          <CardContent>{product.description}</CardContent>
+        </Card>
         <BuiltWithPayla />
       </div>
     </div>

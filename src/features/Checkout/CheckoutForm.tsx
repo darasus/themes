@@ -10,10 +10,14 @@ import {
 import {Button} from "@/components/ui/button"
 import {useConfirmPayment} from "./hooks/useConfirmPayment"
 
-export function CheckoutForm() {
+interface Props {
+  productId: string
+}
+
+export function CheckoutForm({productId}: Props) {
   const stripe = useStripe()
   const elements = useElements()
-  const {error, handleSubmit, isLoading} = useConfirmPayment()
+  const {error, handleSubmit, isLoading} = useConfirmPayment({productId})
 
   return (
     <form

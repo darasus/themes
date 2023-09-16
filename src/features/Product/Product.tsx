@@ -12,9 +12,10 @@ import Image from "next/image"
 
 interface Props {
   product: z.infer<typeof productSchema>
+  productId: string
 }
 
-export function Product({product}: Props) {
+export function Product({product, productId}: Props) {
   return (
     <Card>
       <CardHeader className="items-start">
@@ -36,6 +37,7 @@ export function Product({product}: Props) {
       </CardHeader>
       <CardContent>
         <BuyButton
+          productId={productId}
           amount={product.amount}
           currency={product.currency}
           stripeAccountId={product.stripeAccountId}
