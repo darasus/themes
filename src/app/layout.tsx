@@ -3,6 +3,7 @@ import "./global.css"
 import {ThemeProvider} from "@/components/theme-provider"
 import type {Metadata} from "next"
 import {bodyFont} from "@/lib/fonts"
+import {Analytics} from "@vercel/analytics/react"
 
 export const metadata: Metadata = {
   title: "Payla",
@@ -16,6 +17,7 @@ export default function RootLayout({children}: {children: React.ReactNode}) {
         <ThemeProvider>
           <div>{children}</div>
         </ThemeProvider>
+        <Analytics />
       </body>
     </html>
   )
