@@ -36,14 +36,6 @@ export default async function ProductPage({
           </Avatar>
           <span className="text-lg">{branding.name}</span>
         </div>
-        {/* {isSuccess && (
-          <Card>
-            <CardHeader>
-              <CardTitle>Your purchase is successful!</CardTitle>
-            </CardHeader>
-            <CardContent>{product.description}</CardContent>
-          </Card>
-        )}*/}
         <Product product={product} productId={params.id} />
         <BuiltWithPayla />
       </div>

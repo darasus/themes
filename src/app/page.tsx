@@ -29,8 +29,9 @@ export default function Home() {
 }
 
 function Stripe() {
-  const height = 35 * 0.6
-  const width = 84 * 0.6
+  const ratio = 0.6
+  const height = 35 * ratio
+  const width = 84 * ratio
 
   return (
     <svg

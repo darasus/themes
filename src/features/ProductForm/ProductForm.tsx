@@ -2,7 +2,7 @@
 
 import {zodResolver} from "@hookform/resolvers/zod"
 import {z} from "zod"
-import {useForm, useFormState, useWatch} from "react-hook-form"
+import {useForm, useWatch} from "react-hook-form"
 import {
   Form,
   FormControl,
@@ -26,29 +26,30 @@ import {RadioGroup, RadioGroupItem} from "@/components/ui/radio-group"
 import {LinkStripeAccountButton} from "./features/LinkStripeAccountButton/LinkStripeAccountButton"
 import {FileInput} from "@/components/file-input"
 import {useProductFormStore} from "@/lib/useProductFormStore"
-import {useEffect, useState} from "react"
+import {useEffect} from "react"
 import {encode} from "@/lib/hash"
 import {currencyMap} from "@/constants"
 import {Button} from "@/components/ui/button"
-import {getBaseUrl} from "@/lib/utils"
 import {saveProduct} from "@/lib/actions"
+import {Toaster, toast} from "sonner"
+import {getBaseUrl} from "@/lib/utils"
+import {UrlToast} from "./features/UrlToast/UrlToast"
 
 interface Props {
   initialData?: z.infer<typeof productSchema> | undefined | null
 }
 
 export function ProductForm({initialData}: Props) {
-  const [id, setId] = useState("")
   const {update, values: defaultValues} = useProductFormStore()
   const form = useForm<z.infer<typeof productSchema>>({
     resolver: zodResolver(productSchema),
     defaultValues: initialData || defaultValues,
   })
-  const formState = useFormState({control: form.control})
 
   async function onSubmit(values: z.infer<typeof productSchema>) {
     const {id} = await saveProduct(values)
-    setId(id)
+    const url = new URL(`${getBaseUrl()}/p/${id}`)
+    toast.custom(() => <UrlToast url={url.toString()} />, {})
   }
 
   const values = useWatch({
@@ -61,6 +62,7 @@ export function ProductForm({initialData}: Props) {
 
   return (
     <div className="flex flex-col gap-4">
+      <Toaster position="top-center" />
       <form onSubmit={form.handleSubmit(onSubmit)}>
         <Card>
           <CardHeader>
@@ -207,23 +209,11 @@ export function ProductForm({initialData}: Props) {
               />
             </Form>
           </CardContent>
-          <CardFooter>
-            <Button
-              type="submit"
-              disabled={formState.isSubmitted && !formState.isDirty}
-            >
-              Generate link
-            </Button>
+          <CardFooter className="flex gap-2">
+            <Button type="submit">Generate link</Button>
           </CardFooter>
         </Card>
       </form>
-      {id && (
-        <div className="bg-muted p-4 rounded-lg truncate">
-          <a href={`${getBaseUrl()}/p/${id}`} className="underline">
-            {`${getBaseUrl()}/p/${id}`}
-          </a>
-        </div>
-      )}
     </div>
   )
 }

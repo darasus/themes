@@ -1,5 +1,6 @@
-import {ThemeProvider} from "@/components/theme-provider"
 import "./global.css"
+
+import {ThemeProvider} from "@/components/theme-provider"
 import type {Metadata} from "next"
 import {bodyFont} from "@/lib/fonts"
 
