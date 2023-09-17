@@ -10,7 +10,7 @@ export function UrlToast({url}: Props) {
   const [copied, copy] = useCopyToClipboard()
 
   return (
-    <Card className="flex items-center p-4">
+    <Card className="flex items-center gap-4 p-4">
       <div className="truncate grow">
         <a href={url} className="underline" target="_blank">
           {url.replace("https://", "").replace("http://", "")}
