@@ -1,5 +1,6 @@
 import {Button} from "@/components/ui/button"
 import {Card} from "@/components/ui/card"
+import Link from "next/link"
 import {useCopyToClipboard} from "usehooks-ts"
 
 interface Props {
@@ -12,9 +13,9 @@ export function UrlToast({url}: Props) {
   return (
     <Card className="flex items-center gap-4 p-4">
       <div className="truncate grow">
-        <a href={url} className="underline" target="_blank">
+        <Link href={url} className="underline" target="_blank">
           {url.replace("https://", "").replace("http://", "")}
-        </a>
+        </Link>
       </div>
       <Button
         onClick={() => {
