@@ -31,9 +31,9 @@ import {encode} from "@/lib/hash"
 import {currencyMap} from "@/constants"
 import {Button} from "@/components/ui/button"
 import {saveProduct} from "@/lib/actions"
-import {Toaster, toast} from "sonner"
 import {getBaseUrl} from "@/lib/utils"
 import {UrlToast} from "./features/UrlToast/UrlToast"
+import {toast} from "sonner"
 
 interface Props {
   initialData?: z.infer<typeof productSchema> | undefined | null
@@ -49,7 +49,9 @@ export function ProductForm({initialData}: Props) {
   async function onSubmit(values: z.infer<typeof productSchema>) {
     const {id} = await saveProduct(values)
     const url = new URL(`${getBaseUrl()}/p/${id}`)
-    toast.custom(() => <UrlToast url={url.toString()} />, {})
+    toast.custom(() => <UrlToast url={url.toString()} />, {
+      duration: 5000,
+    })
   }
 
   const values = useWatch({
@@ -62,7 +64,6 @@ export function ProductForm({initialData}: Props) {
 
   return (
     <div className="flex flex-col gap-4">
-      <Toaster position="top-center" />
       <form onSubmit={form.handleSubmit(onSubmit)}>
         <Card>
           <CardHeader>

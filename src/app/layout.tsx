@@ -4,6 +4,7 @@ import {ThemeProvider} from "@/components/theme-provider"
 import type {Metadata} from "next"
 import {bodyFont} from "@/lib/fonts"
 import {Analytics} from "@vercel/analytics/react"
+import {ClientProviders} from "./client-providers"
 
 export const metadata: Metadata = {
   title: "Payla",
@@ -15,7 +16,9 @@ export default function RootLayout({children}: {children: React.ReactNode}) {
     <html lang="en" suppressHydrationWarning>
       <body className={bodyFont.className}>
         <ThemeProvider>
-          <div>{children}</div>
+          <ClientProviders>
+            <div>{children}</div>
+          </ClientProviders>
         </ThemeProvider>
         <Analytics />
       </body>

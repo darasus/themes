@@ -96,8 +96,8 @@ dependencies:
     specifier: ^0.32.5
     version: 0.32.5
   sonner:
-    specifier: ^0.7.1
-    version: 0.7.1(react-dom@18.2.0)(react@18.2.0)
+    specifier: ^0.7.2
+    version: 0.7.2(react-dom@18.2.0)(react@18.2.0)
   stripe:
     specifier: ^13.5.0
     version: 13.5.0
@@ -4248,8 +4248,8 @@ packages:
     resolution: {integrity: sha512-g9Q1haeby36OSStwb4ntCGGGaKsaVSjQ68fBxoQcutl5fS1vuY18H3wSt3jFyFtrkx+Kz0V1G85A4MyAdDMi2Q==}
     engines: {node: '>=8'}
 
-  /sonner@0.7.1(react-dom@18.2.0)(react@18.2.0):
-    resolution: {integrity: sha512-awbVcBwV0xV5TN7kJEZv6Sx7Fi9JBL26vTn0FnBcf6YsyWKnyvz16I/jE6omCtBjd0/YXsPHJ//VuA5fvD2vEg==}
+  /sonner@0.7.2(react-dom@18.2.0)(react@18.2.0):
+    resolution: {integrity: sha512-CQwJSvWFCIz/BACARdnphA9gt7aSLeeZPEbIs+Hp9yJoRYFtx0fqln3JFBxhyRMkLd4ePtEVO6hEOxTfUhb+TQ==}
     peerDependencies:
       react: ^18.0.0
       react-dom: ^18.0.0
