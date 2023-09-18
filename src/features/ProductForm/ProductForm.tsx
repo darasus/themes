@@ -82,7 +82,7 @@ export function ProductForm({initialData}: Props) {
                     <FormLabel>Stripe account ID</FormLabel>
                     <div className="flex gap-2">
                       <FormControl>
-                        <Input {...field} disabled />
+                        <Input {...field} />
                       </FormControl>
                       <LinkStripeAccountButton
                         unlink={() => {
