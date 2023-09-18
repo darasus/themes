@@ -1,6 +1,8 @@
 import {Avatar, AvatarFallback, AvatarImage} from "@/components/ui/avatar"
 import {Card, CardContent, CardHeader, CardTitle} from "@/components/ui/card"
 import {BuiltWithPayla} from "@/features/BuiltWithPayla/BuiltWithPayla"
+import {proseClassName} from "@/features/Editor/constants"
+import {renderToHTML} from "@/features/Editor/editor/renderToHTML"
 import {fetchBranding, getProduct} from "@/lib/actions"
 import {notFound} from "next/navigation"
 
@@ -40,7 +42,14 @@ export default async function CheckoutSuccessPage({
           <CardHeader>
             <CardTitle>Your purchase is successful!</CardTitle>
           </CardHeader>
-          <CardContent>{product.successMessage}</CardContent>
+          <CardContent>
+            <div
+              className={proseClassName}
+              dangerouslySetInnerHTML={{
+                __html: renderToHTML(JSON.parse(product.description)),
+              }}
+            />
+          </CardContent>
         </Card>
         <BuiltWithPayla />
       </div>

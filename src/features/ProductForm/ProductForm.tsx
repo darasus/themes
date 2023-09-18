@@ -20,7 +20,6 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card"
-import {Textarea} from "@/components/ui/textarea"
 import {productSchema} from "@/lib/validation"
 import {RadioGroup, RadioGroupItem} from "@/components/ui/radio-group"
 import {LinkStripeAccountButton} from "./features/LinkStripeAccountButton/LinkStripeAccountButton"
@@ -34,6 +33,7 @@ import {saveProduct} from "@/lib/actions"
 import {getBaseUrl} from "@/lib/utils"
 import {UrlToast} from "./features/UrlToast/UrlToast"
 import {toast} from "sonner"
+import {Editor} from "../Editor/editor/Editor"
 
 interface Props {
   initialData?: z.infer<typeof productSchema> | undefined | null
@@ -117,7 +117,7 @@ export function ProductForm({initialData}: Props) {
                   <FormItem>
                     <FormLabel>Description</FormLabel>
                     <FormControl>
-                      <Textarea {...field} />
+                      <Editor {...field} />
                     </FormControl>
                     <FormMessage />
                   </FormItem>
@@ -202,7 +202,7 @@ export function ProductForm({initialData}: Props) {
                   <FormItem>
                     <FormLabel>Success message</FormLabel>
                     <FormControl>
-                      <Textarea {...field} />
+                      <Editor {...field} />
                     </FormControl>
                     <FormMessage />
                   </FormItem>
