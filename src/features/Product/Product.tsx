@@ -22,7 +22,7 @@ export function Product({product, productId}: Props) {
     <Card>
       <CardHeader className="items-start">
         {product.imageSrc && (
-          <div className="relative w-full aspect-square overflow-hidden mb-2">
+          <div className="relative w-full aspect-square overflow-hidden mb-2 rounded-lg">
             <Image
               src={product.imageSrc}
               alt={`Picture of ${product.title}`}
