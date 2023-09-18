@@ -40,7 +40,7 @@ export default async function CheckoutSuccessPage({
           <CardHeader>
             <CardTitle>Your purchase is successful!</CardTitle>
           </CardHeader>
-          <CardContent>{product.description}</CardContent>
+          <CardContent>{product.successMessage}</CardContent>
         </Card>
         <BuiltWithPayla />
       </div>
