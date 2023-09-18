@@ -46,7 +46,7 @@ export default async function CheckoutSuccessPage({
             <div
               className={proseClassName}
               dangerouslySetInnerHTML={{
-                __html: renderToHTML(JSON.parse(product.description)),
+                __html: renderToHTML(JSON.parse(product.successMessage)),
               }}
             />
           </CardContent>
