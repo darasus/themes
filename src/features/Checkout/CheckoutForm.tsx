@@ -17,7 +17,7 @@ interface Props {
 export function CheckoutForm({productId}: Props) {
   const stripe = useStripe()
   const elements = useElements()
-  const {error, handleSubmit, isLoading} = useConfirmPayment({productId})
+  const {handleSubmit, isLoading, error} = useConfirmPayment({productId})
 
   return (
     <form

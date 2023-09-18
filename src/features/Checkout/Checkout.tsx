@@ -7,6 +7,7 @@ import {CheckoutForm} from "../Checkout/CheckoutForm"
 import {Elements} from "@stripe/react-stripe-js"
 import {Appearance, loadStripe, Stripe} from "@stripe/stripe-js"
 import {useTheme} from "next-themes"
+import {Spinner} from "@/components/spinner"
 
 interface Props {
   amount: number
@@ -17,7 +18,9 @@ interface Props {
 
 export function Checkout(props: Props) {
   const {resolvedTheme} = useTheme()
-  const root = useRef(document.documentElement)
+  const root = useRef(
+    typeof document !== "undefined" ? document.documentElement : null
+  )
   const [variables, setVariables] = useState<Appearance["variables"]>({})
   const [stripe, setStripe] = useState<Stripe | null>(null)
   const [clientSecret, setClientSecret] = useState<string | null>(null)
@@ -41,37 +44,43 @@ export function Checkout(props: Props) {
   }, [props])
 
   useLayoutEffect(() => {
-    const radius = getComputedStyle(root.current).getPropertyValue("--radius")
-    const background = getComputedStyle(root.current)
-      .getPropertyValue("--background")
-      .split(" ")
-      .join(", ")
-    const foreground = getComputedStyle(root.current)
-      .getPropertyValue("--foreground")
-      .split(" ")
-      .join(", ")
-    const primary = getComputedStyle(root.current)
-      .getPropertyValue("--primary")
-      .split(" ")
-      .join(", ")
+    if (root.current) {
+      const radius = getComputedStyle(root.current).getPropertyValue("--radius")
+      const background = getComputedStyle(root.current)
+        .getPropertyValue("--background")
+        .split(" ")
+        .join(", ")
+      const foreground = getComputedStyle(root.current)
+        .getPropertyValue("--foreground")
+        .split(" ")
+        .join(", ")
+      const primary = getComputedStyle(root.current)
+        .getPropertyValue("--primary")
+        .split(" ")
+        .join(", ")
 
-    setVariables((prevState) => {
-      return {
-        ...prevState,
-        borderRadius: radius,
-        colorBackground: `hsl(${background})`,
-        colorText: `hsl(${foreground})`,
-        colorPrimary: `hsl(${primary})`,
-        fontFamily: '"Inter", sans-serif',
-        fontWeightNormal: "600",
-        fontSizeSm: "0.875rem",
-      }
-    })
+      setVariables((prevState) => {
+        return {
+          ...prevState,
+          borderRadius: radius,
+          colorBackground: `hsl(${background})`,
+          colorText: `hsl(${foreground})`,
+          colorPrimary: `hsl(${primary})`,
+          fontFamily: '"Inter", sans-serif',
+          fontWeightNormal: "600",
+          fontSizeSm: "0.875rem",
+        }
+      })
+    }
   }, [resolvedTheme])
 
   return (
     <>
-      {isLoading && <div>Loading...</div>}
+      {isLoading && (
+        <div className="flex justify-center">
+          <Spinner />
+        </div>
+      )}
       {paymentIntentId && clientSecret && stripe && (
         <Elements
           options={{
