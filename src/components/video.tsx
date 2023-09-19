@@ -10,8 +10,8 @@ export default function Player() {
       autoplay
       muted
       loop
-      title="Agent 327: Operation Barbershop"
-      src="https://customer-yo4f815njdmvai2k.cloudflarestream.com/ea1af7d33c39aebe181b82409944a280/manifest/video.m3u8"
+      title="Payla introduction video"
+      src="https://customer-yo4f815njdmvai2k.cloudflarestream.com/3bbdc4b01a7e87f90db1e338b804f64e/manifest/video.m3u8"
     >
       <div className="absolute left-0 right-0 top-0 bottom-0 hidden paused:flex items-center justify-center z-10">
         <MediaPlayButton>

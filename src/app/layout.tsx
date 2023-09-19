@@ -6,6 +6,7 @@ import type {Metadata} from "next"
 import {bodyFont} from "@/lib/fonts"
 import {Analytics} from "@vercel/analytics/react"
 import {ClientProviders} from "./client-providers"
+import {Footer} from "@/components/footer"
 
 export const metadata: Metadata = {
   title: "Payla",
@@ -18,7 +19,10 @@ export default function RootLayout({children}: {children: React.ReactNode}) {
       <body className={bodyFont.className}>
         <ThemeProvider>
           <ClientProviders>
-            <div>{children}</div>
+            <div className="min-h-screen flex flex-col">
+              <div className="flex flex-col grow">{children}</div>
+              <Footer />
+            </div>
           </ClientProviders>
         </ThemeProvider>
         <Analytics />
