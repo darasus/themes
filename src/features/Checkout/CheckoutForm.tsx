@@ -42,7 +42,7 @@ export function CheckoutForm({productId}: Props) {
         disabled={isLoading || !stripe || !elements}
         id="submit"
       >
-        {isLoading ? <div className="spinner" id="spinner"></div> : "Pay now"}
+        {isLoading ? "Paying..." : "Pay now"}
       </Button>
       {error && <div id="payment-message">{error}</div>}
     </form>
