@@ -24,19 +24,19 @@ export function Product({product, productId}: Props) {
     <Card>
       <CardHeader className="items-start">
         {product.imageSrc && (
-          <div className="relative w-full aspect-square overflow-hidden mb-2 rounded-lg">
+          <div className="relative w-full aspect-square overflow-hidden mb-6 rounded-lg">
             <Image
               src={product.imageSrc}
               alt={`Picture of ${product.title}`}
               fill
               style={{
-                objectFit: "cover",
+                objectFit: "contain",
               }}
               sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
             />
           </div>
         )}
-        <CardTitle>{product.title}</CardTitle>
+        <CardTitle className="leading-tight">{product.title}</CardTitle>
         <CardDescription>
           <div
             className={proseClassName}
