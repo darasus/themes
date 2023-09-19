@@ -1,4 +1,5 @@
 import "./global.css"
+import "vidstack/styles/base.css"
 
 import {ThemeProvider} from "@/components/theme-provider"
 import type {Metadata} from "next"
