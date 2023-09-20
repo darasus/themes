@@ -52,12 +52,14 @@ export default async function CheckoutPage({
           <CardTitle>Checkout</CardTitle>
         </CardHeader>
         <CardContent>
-          <Checkout
-            amount={Number(amount) * 100}
-            currency={currency}
-            productId={params.id}
-            stripeAccountId={stripeAccountId}
-          />
+          {currency && stripeAccountId && (
+            <Checkout
+              amount={Number(amount) * 100}
+              currency={currency}
+              productId={params.id}
+              stripeAccountId={stripeAccountId}
+            />
+          )}
         </CardContent>
       </Card>
     </div>

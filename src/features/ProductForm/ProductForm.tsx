@@ -20,7 +20,7 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card"
-import {productSchema} from "@/lib/validation"
+import {hashSchema, productSchema} from "@/lib/validation"
 import {RadioGroup, RadioGroupItem} from "@/components/ui/radio-group"
 import {LinkStripeAccountButton} from "./features/LinkStripeAccountButton/LinkStripeAccountButton"
 import {FileInput} from "@/components/file-input"
@@ -36,7 +36,7 @@ import {toast} from "sonner"
 import {Editor} from "../Editor/editor/Editor"
 
 interface Props {
-  initialData?: z.infer<typeof productSchema> | undefined | null
+  initialData?: z.infer<typeof hashSchema> | undefined | null
 }
 
 export function ProductForm({initialData}: Props) {

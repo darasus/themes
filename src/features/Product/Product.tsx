@@ -1,5 +1,5 @@
 import {z} from "zod"
-import {productSchema} from "@/lib/validation"
+import {hashSchema} from "@/lib/validation"
 import {
   Card,
   CardContent,
@@ -15,7 +15,7 @@ import {proseClassName} from "../Editor/constants"
 import {renderToHTML} from "../Editor/editor/renderToHTML"
 
 interface Props {
-  product: z.infer<typeof productSchema>
+  product: z.infer<typeof hashSchema>
   productId: string
 }
 
@@ -37,14 +37,16 @@ export function Product({product, productId}: Props) {
           </div>
         )}
         <CardTitle className="leading-tight">{product.title}</CardTitle>
-        <CardDescription>
-          <div
-            className={proseClassName}
-            dangerouslySetInnerHTML={{
-              __html: renderToHTML(JSON.parse(product.description)),
-            }}
-          />
-        </CardDescription>
+        {product.description && (
+          <CardDescription>
+            <div
+              className={proseClassName}
+              dangerouslySetInnerHTML={{
+                __html: renderToHTML(JSON.parse(product.description)),
+              }}
+            />
+          </CardDescription>
+        )}
       </CardHeader>
       <CardContent>
         <Button className="w-full" asChild>

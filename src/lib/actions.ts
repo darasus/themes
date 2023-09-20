@@ -8,7 +8,7 @@ import {unstable_cache} from "next/cache"
 import {enrichHash} from "./hash"
 import {kv} from "@vercel/kv"
 import {init} from "@paralleldrive/cuid2"
-import {productSchema} from "./validation"
+import {hashSchema, productSchema} from "./validation"
 import {z} from "zod"
 
 function createStripe(stripeAccountId?: string) {
@@ -128,7 +128,7 @@ export async function saveProduct(values: z.infer<typeof productSchema>) {
 }
 
 export async function getProduct(id: string) {
-  const data = await kv.get<z.infer<typeof productSchema>>(id)
+  const data = await kv.get<z.infer<typeof hashSchema>>(id)
 
   return data
 }

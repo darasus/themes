@@ -23,33 +23,39 @@ export default async function CheckoutSuccessPage({
     notFound()
   }
 
-  const branding = await fetchBranding(product?.stripeAccountId)
+  const branding = product?.stripeAccountId
+    ? await fetchBranding(product?.stripeAccountId)
+    : null
 
   return (
     <div className="p-4">
       <div className="flex flex-col gap-4 m-auto max-w-md">
-        <div className="flex items-center justify-center gap-2">
-          <Avatar>
-            <AvatarImage
-              src={branding.logoSrc}
-              alt={`Logo for ${branding.name}`}
-            />
-            <AvatarFallback>{branding.name?.charAt(0)}</AvatarFallback>
-          </Avatar>
-          <span className="text-lg">{branding.name}</span>
-        </div>
+        {branding && (
+          <div className="flex items-center justify-center gap-2">
+            <Avatar>
+              <AvatarImage
+                src={branding.logoSrc}
+                alt={`Logo for ${branding.name}`}
+              />
+              <AvatarFallback>{branding.name?.charAt(0)}</AvatarFallback>
+            </Avatar>
+            <span className="text-lg">{branding.name}</span>
+          </div>
+        )}
         <Card>
           <CardHeader>
             <CardTitle>Your purchase is successful!</CardTitle>
           </CardHeader>
-          <CardContent>
-            <div
-              className={proseClassName}
-              dangerouslySetInnerHTML={{
-                __html: renderToHTML(JSON.parse(product.successMessage)),
-              }}
-            />
-          </CardContent>
+          {product.successMessage && (
+            <CardContent>
+              <div
+                className={proseClassName}
+                dangerouslySetInnerHTML={{
+                  __html: renderToHTML(JSON.parse(product.successMessage)),
+                }}
+              />
+            </CardContent>
+          )}
         </Card>
         <BuiltWithPayla />
       </div>

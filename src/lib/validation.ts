@@ -16,11 +16,11 @@ export const productSchema = z.object({
 })
 
 export const hashSchema = z.object({
-  title: z.string(),
-  description: z.string(),
-  imageSrc: z.string(),
-  amount: z.string(),
-  currency: z.enum(["USD", "EUR", "GBP"]),
-  stripeAccountId: z.string(),
-  successMessage: z.string(),
+  title: z.string().optional(),
+  description: z.string().optional(),
+  imageSrc: z.string().optional(),
+  amount: z.string().optional(),
+  currency: z.enum(["USD", "EUR", "GBP"]).optional(),
+  stripeAccountId: z.string().optional(),
+  successMessage: z.string().optional(),
 })
