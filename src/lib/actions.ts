@@ -80,19 +80,23 @@ export async function fetchBranding(stripeAccountId: string) {
       const {settings, business_profile} = result
       let logoSrc = ""
 
-      if (typeof settings?.branding.icon === "string") {
-        const result = await stripe.fileLinks.create({
-          file: settings.branding.icon,
-        })
+      try {
+        if (typeof settings?.branding.icon === "string") {
+          const result = await stripe.fileLinks.create({
+            file: settings.branding.icon,
+          })
 
-        if (result.url) {
-          const response = await fetch(result.url)
-          const buffer = await response.arrayBuffer()
-          const srcBase64 = await sharp(buffer).resize(100).webp().toBuffer()
-          const imageSrcBase64 =
-            "data:image/png;base64," + srcBase64.toString("base64")
-          logoSrc = imageSrcBase64
+          if (result.url) {
+            const response = await fetch(result.url)
+            const buffer = await response.arrayBuffer()
+            const srcBase64 = await sharp(buffer).resize(100).webp().toBuffer()
+            const imageSrcBase64 =
+              "data:image/png;base64," + srcBase64.toString("base64")
+            logoSrc = imageSrcBase64
+          }
         }
+      } catch (error) {
+        console.error('No logo found for account "' + stripeAccountId + '"')
       }
 
       return {
