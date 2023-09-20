@@ -10,7 +10,8 @@ import {Footer} from "@/components/footer"
 
 export const metadata: Metadata = {
   title: "Payla",
-  description: "Simplest and quickest way to sell online",
+  description:
+    "Simplest and quickest way to sell online. It literally takes seconds.",
 }
 
 export default function RootLayout({children}: {children: React.ReactNode}) {
