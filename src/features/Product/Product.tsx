@@ -7,39 +7,27 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card"
-import Image from "next/image"
 import {Button} from "@/components/ui/button"
 import {formatCents} from "@/lib/formatCents"
 import Link from "next/link"
 import {proseClassName} from "../Editor/constants"
 import {renderToHTML} from "../Editor/editor/renderToHTML"
+import {ProductImage} from "./ProductImage"
 
 interface Props {
   product: z.infer<typeof hashSchema>
   productId: string
 }
 
-export function Product({product, productId}: Props) {
+export async function Product({product, productId}: Props) {
   return (
     <Card>
       <CardHeader className="items-start">
-        {product.imageSrc && (
-          <div className="relative w-full aspect-square overflow-hidden mb-6 rounded-lg">
-            <Image
-              src={product.imageSrc}
-              alt={`Picture of ${product.title}`}
-              fill
-              style={{
-                objectFit: "contain",
-              }}
-              sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-            />
-          </div>
-        )}
+        <ProductImage product={product} />
         <CardTitle className="leading-tight">{product.title}</CardTitle>
         {product.description && (
           <CardDescription>
-            <div
+            <span
               className={proseClassName}
               dangerouslySetInnerHTML={{
                 __html: renderToHTML(JSON.parse(product.description)),
