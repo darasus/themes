@@ -30,10 +30,10 @@ import {encode} from "@/lib/hash"
 import {currencyMap} from "@/constants"
 import {Button} from "@/components/ui/button"
 import {saveProduct} from "@/lib/actions"
-import {getBaseUrl} from "@/lib/utils"
-import {UrlToast} from "./features/UrlToast/UrlToast"
-import {toast} from "sonner"
 import {Editor} from "../Editor/editor/Editor"
+import {toast} from "sonner"
+import {UrlToast} from "./features/UrlToast/UrlToast"
+import {getBaseUrl} from "@/lib/utils"
 
 interface Props {
   initialData?: z.infer<typeof hashSchema> | undefined | null
@@ -47,11 +47,19 @@ export function ProductForm({initialData}: Props) {
   })
 
   async function onSubmit(values: z.infer<typeof productSchema>) {
-    const {id} = await saveProduct(values)
-    const url = new URL(`${getBaseUrl()}/p/${id}`)
-    toast.custom(() => <UrlToast url={url.toString()} />, {
-      duration: 5000,
-    })
+    const result = await saveProduct(values)
+
+    if ("error" in result) {
+      toast.error(result.error.message)
+    }
+
+    if ("id" in result) {
+      const url = new URL(`${getBaseUrl()}/p/${result.id}`)
+
+      toast.success(<UrlToast url={url.toString()} />, {
+        duration: 5000,
+      })
+    }
   }
 
   const values = useWatch({

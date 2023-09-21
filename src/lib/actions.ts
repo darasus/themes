@@ -11,6 +11,14 @@ import {init} from "@paralleldrive/cuid2"
 import {hashSchema, productSchema} from "./validation"
 import {z} from "zod"
 
+const createError = ({message}: {message: string}) => {
+  return {
+    error: {
+      message,
+    },
+  }
+}
+
 function createStripe(stripeAccountId?: string) {
   return new Stripe(process.env.STRIPE_API_SECRET!, {
     apiVersion: "2023-08-16",
@@ -119,6 +127,18 @@ const createId = init({
 })
 
 export async function saveProduct(values: z.infer<typeof productSchema>) {
+  const stripe = createStripe()
+  const account = await stripe.accounts
+    .retrieve(values.stripeAccountId)
+    .catch(() => null)
+
+  if (!account || !account?.details_submitted) {
+    return createError({
+      message:
+        "Account doesn't not exist or incorrectly setup. Please complete your Stripe account setup.",
+    })
+  }
+
   const id = createId()
   await kv.set<z.infer<typeof productSchema>>(id, values, {
     ex: 60 * 60 * 24 * 365 * 10, // 10 years
