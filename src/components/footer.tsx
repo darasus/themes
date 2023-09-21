@@ -3,6 +3,7 @@
 import {useTheme} from "next-themes"
 import {Button} from "./ui/button"
 import {Laptop, Moon, Sun} from "lucide-react"
+import Link from "next/link"
 
 export function Footer() {
   const {setTheme} = useTheme()
@@ -10,14 +11,21 @@ export function Footer() {
   return (
     <div className="w-full max-w-6xl m-auto flex items-center py-2 px-6 text-sm">
       <span>
-        Payla · Built by{" "}
+        <Link href="/" className="underline">
+          Payla
+        </Link>
+        {" · "}
+        <Link href="/faq" className="underline">
+          FAQ
+        </Link>
+        {" · "}Built by{" "}
         <a
           href="https://twitter.com/darasus_"
           target="_blank"
           className="underline"
         >
           Darasus
-        </a>
+        </a>{" "}
       </span>
       <div className="grow" />
       <div className="flex items-center gap-2">
