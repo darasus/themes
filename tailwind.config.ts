@@ -72,12 +72,5 @@ module.exports = {
       },
     },
   },
-  plugins: [
-    require("tailwindcss-animate"),
-    require("@tailwindcss/typography"),
-    require("vidstack/tailwind.cjs"),
-  ],
-  compilerOptions: {
-    types: ["vidstack/globals"],
-  },
+  plugins: [require("tailwindcss-animate"), require("@tailwindcss/typography")],
 }

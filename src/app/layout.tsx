@@ -1,17 +1,15 @@
 import "./global.css"
-import "vidstack/styles/base.css"
 
 import {ThemeProvider} from "@/components/theme-provider"
 import type {Metadata} from "next"
 import {bodyFont} from "@/lib/fonts"
-import {Analytics} from "@vercel/analytics/react"
-import {ClientProviders} from "./client-providers"
 import {Footer} from "@/components/footer"
+import {ThemeWrapper} from "@/components/theme-wrapper"
+import {ThemeSwitcher} from "@/components/theme-switcher"
 
 export const metadata: Metadata = {
-  title: "Payla",
-  description:
-    "Simplest and quickest way to sell online. It literally takes seconds.",
+  title: "Themes",
+  description: "Tailwind themes",
 }
 
 export default function RootLayout({children}: {children: React.ReactNode}) {
@@ -19,14 +17,14 @@ export default function RootLayout({children}: {children: React.ReactNode}) {
     <html lang="en" suppressHydrationWarning>
       <body className={bodyFont.className}>
         <ThemeProvider>
-          <ClientProviders>
+          <ThemeWrapper>
             <div className="min-h-screen flex flex-col">
-              <div className="flex flex-col grow">{children}</div>
+              <div className="flex flex-col grow p-6">{children}</div>
               <Footer />
             </div>
-          </ClientProviders>
+          </ThemeWrapper>
         </ThemeProvider>
-        <Analytics />
+        <ThemeSwitcher />
       </body>
     </html>
   )

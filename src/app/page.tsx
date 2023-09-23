@@ -1,42 +1,52 @@
+import {UiSection} from "@/components/UiSection"
+import {ThemeCustomizer} from "@/components/theme-customizer"
+import {
+  Accordion,
+  AccordionItem,
+  AccordionTrigger,
+  AccordionContent,
+} from "@/components/ui/accordion"
 import {Button} from "@/components/ui/button"
-import {Logo} from "@/features/Logo/Logo"
-import dynamic from "next/dynamic"
-import Link from "next/link"
-import {Suspense} from "react"
-
-const DynamicPlayer = dynamic(() => import("../components/video"), {
-  ssr: false,
-})
+import {Input} from "@/components/ui/input"
 
 export default function Home() {
   return (
-    <main className="flex flex-col justify-center items-center grow gap-6 px-4 ">
-      <div className="grid grid-cols-1 md:grid-cols-12 gap-4 max-w-6xl">
-        <div className="flex flex-col items-center justify-center md:items-start col-span-6 gap-4">
-          <div className="flex items-center border rounded-full bg-muted dark:bg-muted/20 px-4 py-1 text-xs gap-1 mb-2">
-            Powered by <span className="font-bold">Stripe</span>
-          </div>
-          <Logo className="mb-4" />
-          <span className="text-xl mb-4 text-center md:text-left">
-            Simplest and quickest way to sell online. It literally takes{" "}
-            <span className="underline">seconds</span>.
-            <span className="text-gray-600">*</span>
-          </span>
-          <Button size="lg" asChild>
-            <Link href={"/create"}>Start selling</Link>
-          </Button>
-          <span className="text-gray-600">
-            * if you already have Stripe account.
-          </span>
-        </div>
-        <div className="col-span-6 flex items-center">
-          <div className="flex justify-center w-full card rounded-lg overflow-hidden border aspect-video bg-black">
-            <Suspense>
-              <DynamicPlayer />
-            </Suspense>
-          </div>
-        </div>
-      </div>
-    </main>
+    <div>
+      <header>
+        <ThemeCustomizer />
+      </header>
+      <main className="flex flex-col grow gap-6">
+        <UiSection>
+          <Accordion type="single" collapsible className="w-full">
+            <AccordionItem value="item-1">
+              <AccordionTrigger>Is it accessible?</AccordionTrigger>
+              <AccordionContent>
+                Yes. It adheres to the WAI-ARIA design pattern.
+              </AccordionContent>
+            </AccordionItem>
+            <AccordionItem value="item-2">
+              <AccordionTrigger>Is it styled?</AccordionTrigger>
+              <AccordionContent>
+                Yes. It comes with default styles that matches the other
+                components&apos; aesthetic.
+              </AccordionContent>
+            </AccordionItem>
+            <AccordionItem value="item-3">
+              <AccordionTrigger>Is it animated?</AccordionTrigger>
+              <AccordionContent>
+                Yes. It&apos;s animated by default, but you can disable it if
+                you prefer.
+              </AccordionContent>
+            </AccordionItem>
+          </Accordion>
+        </UiSection>
+        <UiSection>
+          <Button>Purchase</Button>
+        </UiSection>
+        <UiSection>
+          <Input />
+        </UiSection>
+      </main>
+    </div>
   )
 }
