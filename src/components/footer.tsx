@@ -14,10 +14,6 @@ export function Footer() {
         <Link href="/" className="underline">
           Payla
         </Link>
-        {" · "}
-        <Link href="/faq" className="underline">
-          FAQ
-        </Link>
         {" · "}Built by{" "}
         <a
           href="https://twitter.com/darasus_"
