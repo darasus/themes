@@ -9,6 +9,7 @@ import {
 } from "./ui/navigation-menu"
 import {forwardRef} from "react"
 import {cn} from "@/lib/utils"
+import {Logo} from "@/features/Logo/Logo"
 
 export function Header() {
   return (
@@ -16,7 +17,9 @@ export function Header() {
       <NavigationMenu className="relative rounded-full border px-3 py-2 backdrop-blur-md">
         <NavigationMenuList>
           <NavigationMenuItem>
-            <Item href="/">TTT</Item>
+            <Item href="/">
+              <Logo />
+            </Item>
           </NavigationMenuItem>
           <NavigationMenuItem>
             <Item href="/components">Components</Item>

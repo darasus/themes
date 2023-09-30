@@ -8,11 +8,8 @@ interface Props {
 
 export function Logo({className}: Props) {
   return (
-    <Link
-      href={getBaseUrl()}
-      className={cn(logoFont.className, "text-7xl", className)}
-    >
-      Payla
+    <Link href={getBaseUrl()} className={cn(logoFont.className, className)}>
+      TTT
     </Link>
   )
 }
