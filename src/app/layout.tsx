@@ -3,13 +3,13 @@ import "./global.css"
 import {ThemeProvider} from "@/components/theme-provider"
 import type {Metadata} from "next"
 import {bodyFont} from "@/lib/fonts"
-import {Footer} from "@/components/footer"
+import {Footer} from "@/components/Footer"
 import {ThemeWrapper} from "@/components/theme-wrapper"
 import {ThemeSwitcher} from "@/components/theme-switcher"
+import {Header} from "@/components/Header"
 
 export const metadata: Metadata = {
-  title: "Themes",
-  description: "Tailwind themes",
+  title: "The Tailwind Theme",
 }
 
 export default function RootLayout({children}: {children: React.ReactNode}) {
@@ -18,8 +18,9 @@ export default function RootLayout({children}: {children: React.ReactNode}) {
       <body className={bodyFont.className}>
         <ThemeProvider>
           <ThemeWrapper>
-            <div className="min-h-screen flex flex-col">
-              <div className="flex flex-col grow p-6">{children}</div>
+            <div className="flex min-h-screen flex-col gap-6 p-6">
+              <Header />
+              <div className="flex grow flex-col">{children}</div>
               <Footer />
             </div>
           </ThemeWrapper>

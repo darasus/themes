@@ -4,5 +4,6 @@
   "semi": false,
   "singleQuote": false,
   "bracketSpacing": false,
-  "always": "always"
+  "always": "always",
+  "plugins": ["prettier-plugin-tailwindcss"]
 }

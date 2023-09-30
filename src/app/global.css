@@ -57,7 +57,7 @@
 
 .dotted-bg {
   background-image: radial-gradient(
-    hsl(var(--muted-foreground) / 0.2) 1px,
+    hsl(var(--muted-foreground) / 0.1) 1px,
     transparent 0
   );
   background-size: 10px 10px;
