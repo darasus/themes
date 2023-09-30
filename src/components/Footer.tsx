@@ -14,7 +14,7 @@ export function Footer() {
       <div className="flex items-center text-sm">
         <span>
           <Link href="/" className="underline">
-            Payla
+            The Tailwind Theme
           </Link>
           {" · "}Built by{" "}
           <a

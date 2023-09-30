@@ -11,7 +11,7 @@ export const getBaseUrl = () => {
   }
 
   if (process.env.NEXT_PUBLIC_VERCEL_ENV === "production") {
-    return "https://www.payla.link"
+    return "https://www.thetailwindtheme.com"
   }
 
   if (process.env.NEXT_PUBLIC_VERCEL_ENV === "development") {
