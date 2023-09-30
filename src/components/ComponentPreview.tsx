@@ -24,9 +24,7 @@ export function ComponentPreview({
         className
       )}
     >
-      {/* <div className="flex h-full w-full max-w-md items-center justify-center"> */}
       {children}
-      {/* </div> */}
     </section>
   )
 }

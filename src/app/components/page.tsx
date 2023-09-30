@@ -1,5 +1,4 @@
 import {ComponentPreview} from "@/components/ComponentPreview"
-import {ThemeCustomizer} from "@/components/theme-customizer"
 import {Label} from "@/components/ui/label"
 
 import {AccordionDemo} from "@/demos/components/AccordionDemo"
@@ -87,9 +86,6 @@ const items = [
 export default function Home() {
   return (
     <div className="flex flex-col gap-6">
-      <div className="max-w-md">
-        <ThemeCustomizer />
-      </div>
       <main className="flex grow flex-col gap-6">
         <div className="grid grid-cols-1 justify-stretch gap-6 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3">
           {items.map(({name, demo: Demo}) => (

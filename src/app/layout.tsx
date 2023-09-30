@@ -7,6 +7,7 @@ import {Footer} from "@/components/Footer"
 import {ThemeWrapper} from "@/components/theme-wrapper"
 import {ThemeSwitcher} from "@/components/theme-switcher"
 import {Header} from "@/components/Header"
+import {CustomizerFloatingMenu} from "@/features/Customizer/CustomizerFloatingMenu"
 
 export const metadata: Metadata = {
   title: "The Tailwind Theme",
@@ -23,6 +24,7 @@ export default function RootLayout({children}: {children: React.ReactNode}) {
               <div className="flex grow flex-col">{children}</div>
               <Footer />
             </div>
+            <CustomizerFloatingMenu />
           </ThemeWrapper>
         </ThemeProvider>
         <ThemeSwitcher />
