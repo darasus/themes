@@ -13,3 +13,7 @@ export function Logo({className}: Props) {
     </Link>
   )
 }
+
+export function LogoView({className}: Props) {
+  return <span className={cn(logoFont.className, className)}>TTT</span>
+}

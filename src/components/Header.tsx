@@ -9,7 +9,7 @@ import {
 } from "./ui/navigation-menu"
 import {forwardRef} from "react"
 import {cn} from "@/lib/utils"
-import {Logo} from "@/features/Logo/Logo"
+import {LogoView} from "@/features/Logo/Logo"
 
 export function Header() {
   return (
@@ -18,7 +18,7 @@ export function Header() {
         <NavigationMenuList>
           <NavigationMenuItem>
             <Item href="/">
-              <Logo />
+              <LogoView />
             </Item>
           </NavigationMenuItem>
           <NavigationMenuItem>
