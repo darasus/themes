@@ -54,51 +54,49 @@ function Customizer() {
   return (
     <div className="flex flex-1 flex-col space-y-4">
       <div className="space-y-1.5">
-        <Label className="text-xs">Color</Label>
-        <div className="grid grid-cols-3 gap-2">
+        <Label>Color</Label>
+        <div className="grid grid-cols-4 gap-2">
           {themes.map((theme) => {
             const isActive = config.theme === theme.name
 
             return (
-              <Button
-                variant={"outline"}
-                size="sm"
-                key={theme.name}
-                onClick={() => {
-                  setConfig({
-                    ...config,
-                    theme: theme.name,
-                  })
-                }}
-                className={cn(
-                  "justify-start",
-                  isActive && "border-2 border-primary"
-                )}
+              <div
+                className={cn(`theme-${theme.name}`, {dark: mode === "dark"})}
               >
-                <span
+                <Button
+                  size="sm"
+                  key={theme.name}
+                  onClick={() => {
+                    setConfig({
+                      ...config,
+                      theme: theme.name,
+                    })
+                  }}
                   className={cn(
-                    {dark: mode === "dark"},
-                    `theme-${theme.name}`,
-                    "mr-1 flex h-5 w-5 shrink-0 -translate-x-1 items-center justify-center rounded-full bg-primary"
+                    "flex justify-start",
+                    "h-full w-full",
+                    "px-3 py-5",
+                    "bg-gradient-to-br from-primary to-primary/60",
+                    "bg-transparent",
+                    "text-primary-foreground"
                   )}
                 >
+                  {theme.label}
                   {isActive && (
-                    <CheckIcon className="h-4 w-4 text-primary-foreground" />
+                    <CheckIcon className="h-5 w-5 text-primary-foreground" />
                   )}
-                </span>
-                {theme.label}
-              </Button>
+                </Button>
+              </div>
             )
           })}
         </div>
       </div>
       <div className="space-y-1.5">
-        <Label className="text-xs">Radius</Label>
-        <div className="grid grid-cols-5 gap-2">
+        <Label>Radius</Label>
+        <div className="flex gap-4">
           {["0", "0.3", "0.5", "0.75", "1.0"].map((value) => {
             return (
               <Button
-                variant={"outline"}
                 size="sm"
                 key={value}
                 onClick={() => {
@@ -108,18 +106,33 @@ function Customizer() {
                   })
                 }}
                 className={cn(
-                  config.radius === parseFloat(value) &&
-                    "border-2 border-primary"
+                  "h-auto w-auto p-0",
+                  "border-2 border-none border-primary bg-transparent hover:bg-transparent"
                 )}
               >
-                {value}
+                <div
+                  className={cn(
+                    "h-6 w-6 border-l-2 border-t-2 bg-muted/50",
+                    {
+                      "rounded-tl-none": value === "0",
+                      "rounded-tl-[4px]": value === "0.3",
+                      "rounded-tl-[6px]": value === "0.5",
+                      "rounded-tl-[8px]": value === "0.75",
+                      "rounded-tl-[10px]": value === "1.0",
+                    },
+                    {
+                      "border-primary bg-primary/30":
+                        config.radius === parseFloat(value),
+                    }
+                  )}
+                />
               </Button>
             )
           })}
         </div>
       </div>
       <div className="space-y-1.5">
-        <Label className="text-xs">Mode</Label>
+        <Label>Mode</Label>
         <div className="grid grid-cols-3 gap-2">
           <>
             <Button
