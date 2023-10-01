@@ -74,7 +74,7 @@ function Customizer() {
                   }}
                   className={cn(
                     "flex justify-start",
-                    "h-full w-full",
+                    "h-full w-full min-w-[100px]",
                     "px-3 py-5",
                     "bg-gradient-to-br from-primary to-primary/60",
                     "bg-transparent",

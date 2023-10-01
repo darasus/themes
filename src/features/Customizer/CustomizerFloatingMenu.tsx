@@ -11,9 +11,9 @@ export function CustomizerFloatingMenu() {
 
   return (
     <motion.div
-      className={cn("fixed bottom-6 right-6 z-50 flex flex-col gap-4", {
-        "w-full max-w-lg": true,
-      })}
+      className={cn(
+        "pointer-events-none fixed bottom-6 right-6 z-50 flex flex-col gap-4"
+      )}
     >
       <AnimatePresence>
         {isOpen && (
@@ -22,6 +22,7 @@ export function CustomizerFloatingMenu() {
             animate={{opacity: 1, y: 0}}
             exit={{opacity: 0, y: 20}}
             transition={{duration: 0.2, ease: "anticipate"}}
+            className="pointer-events-auto"
           >
             <ThemeCustomizer />
           </motion.div>
@@ -33,7 +34,7 @@ export function CustomizerFloatingMenu() {
             toggleOpen()
           }}
           size="icon"
-          className="h-auto w-auto rounded-full p-4"
+          className="pointer-events-auto h-auto w-auto rounded-full p-4"
         >
           {isOpen ? (
             <XIcon className="h-7 w-7" />
