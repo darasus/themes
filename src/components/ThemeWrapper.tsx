@@ -26,6 +26,7 @@ export function ThemeWrapper({
       style={
         {
           "--radius": `${defaultTheme ? 0.5 : config.radius}rem`,
+          "--spacing": `${config.spacing}px`,
         } as React.CSSProperties
       }
     >

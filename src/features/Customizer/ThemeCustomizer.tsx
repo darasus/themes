@@ -2,7 +2,6 @@
 
 import * as React from "react"
 import {ResetIcon} from "@radix-ui/react-icons"
-import {useTheme} from "next-themes"
 import {useConfig} from "@/lib/useConfig"
 import {Button} from "../../components/ui/button"
 import {
@@ -17,6 +16,7 @@ import {PrimaryColorPicker} from "./PrimaryColorPicker"
 import {RadiusPicker} from "./RadiusPicker"
 import {ModePicker} from "./ModePicker"
 import {FontPicker} from "./FontPicker"
+import {SpacingPicker} from "./SpacingPicker"
 
 export function ThemeCustomizer() {
   const [mounted, setMounted] = React.useState(false)
@@ -48,9 +48,6 @@ export function ThemeCustomizer() {
 }
 
 function Customizer() {
-  const {setTheme: setMode, resolvedTheme: mode} = useTheme()
-  const [config, setConfig] = useConfig()
-
   return (
     <div className="flex flex-1 flex-col space-y-4">
       <div>
@@ -64,6 +61,9 @@ function Customizer() {
       </div>
       <div>
         <FontPicker />
+      </div>
+      <div>
+        <SpacingPicker />
       </div>
     </div>
   )
@@ -88,6 +88,8 @@ function Buttons() {
             ...config,
             theme: "zinc",
             radius: 0.5,
+            font: "Inter",
+            spacing: 1,
           })
         }}
       >
