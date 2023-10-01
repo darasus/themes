@@ -1,6 +1,6 @@
 "use client"
 
-import {ThemeCustomizer} from "@/components/theme-customizer"
+import {ThemeCustomizer} from "@/features/Customizer/ThemeCustomizer"
 import {Button} from "@/components/ui/button"
 import {cn} from "@/lib/utils"
 import {AnimatePresence, motion, useCycle} from "framer-motion"
