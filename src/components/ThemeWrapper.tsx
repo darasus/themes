@@ -1,5 +1,6 @@
 "use client"
 
+import {fonts} from "@/lib/fonts"
 import {useConfig} from "@/lib/useConfig"
 import {cn} from "@/lib/utils"
 
@@ -19,6 +20,7 @@ export function ThemeWrapper({
       className={cn(
         `theme-${defaultTheme || config.theme}`,
         "w-full",
+        fonts[config.font].className,
         className
       )}
       style={

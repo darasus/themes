@@ -18,10 +18,12 @@ export function PrimaryColorPicker() {
           const isActive = config.theme === theme.name
 
           return (
-            <div className={cn(`theme-${theme.name}`, {dark: mode === "dark"})}>
+            <div
+              className={cn(`theme-${theme.name}`, {dark: mode === "dark"})}
+              key={theme.name}
+            >
               <Button
                 size="sm"
-                key={theme.name}
                 onClick={() => {
                   setConfig({
                     ...config,

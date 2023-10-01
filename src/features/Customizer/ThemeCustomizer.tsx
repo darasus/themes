@@ -16,6 +16,7 @@ import {
 import {PrimaryColorPicker} from "./PrimaryColorPicker"
 import {RadiusPicker} from "./RadiusPicker"
 import {ModePicker} from "./ModePicker"
+import {FontPicker} from "./FontPicker"
 
 export function ThemeCustomizer() {
   const [mounted, setMounted] = React.useState(false)
@@ -60,6 +61,9 @@ function Customizer() {
       </div>
       <div>
         <ModePicker />
+      </div>
+      <div>
+        <FontPicker />
       </div>
     </div>
   )
