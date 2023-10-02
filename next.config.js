@@ -5,6 +5,7 @@ const nextConfig = {
       "images.unsplash.com",
       "files.stripe.com",
       "vv8y7sfrh21nafsl.public.blob.vercel-storage.com",
+      "plus.unsplash.com",
     ],
   },
   reactStrictMode: false,

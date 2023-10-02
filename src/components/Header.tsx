@@ -25,7 +25,7 @@ export function Header() {
             <Item href="/components">Components</Item>
           </NavigationMenuItem>
           <NavigationMenuItem>
-            <Item href="/ui">UI</Item>
+            <Item href="/ui/page-sections">UI</Item>
           </NavigationMenuItem>
         </NavigationMenuList>
       </NavigationMenu>

@@ -83,7 +83,7 @@ const items = [
   {name: "Tooltip", demo: TooltipDemo},
 ]
 
-export default function Home() {
+export default function ComponentsPage() {
   return (
     <div className="flex flex-col gap-6">
       <main className="flex grow flex-col gap-6">

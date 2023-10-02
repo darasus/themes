@@ -45,7 +45,6 @@ export function CopyButton({value, className, src, ...props}: CopyButtonProps) {
       }}
       {...props}
     >
-      <span className="sr-only">Copy</span>
       {hasCopied ? (
         <CheckIcon className="h-3 w-3" />
       ) : (
@@ -96,7 +95,6 @@ export function CopyWithClassNames({
           ) : (
             <CopyIcon className="h-3 w-3" />
           )}
-          <span className="sr-only">Copy</span>
         </Button>
       </DropdownMenuTrigger>
       <DropdownMenuContent align="end">
