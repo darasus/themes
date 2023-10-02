@@ -7,7 +7,10 @@ import {
 } from "next/font/google"
 
 const cherryBombOne = Cherry_Bomb_One({subsets: ["latin"], weight: ["400"]})
-const inter = Inter({subsets: ["latin"]})
+const inter = Inter({
+  subsets: ["latin"],
+  weight: ["100", "200", "300", "400", "500", "600", "700", "800", "900"],
+})
 
 const roboto = Roboto({
   subsets: ["latin"],
