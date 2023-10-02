@@ -13,8 +13,8 @@ export function SpacingPicker() {
       <div className="flex gap-2">
         <Slider
           value={[config.spacing]}
-          min={0.5}
-          max={1.5}
+          min={0.6}
+          max={1.4}
           step={0.1}
           className={cn("w-[60%]")}
           onValueChange={(value) => {
