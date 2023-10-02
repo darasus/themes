@@ -1,11 +1,9 @@
 import {Button} from "@/components/ui/button"
 import {CheckCircleIcon} from "lucide-react"
-import Link from "next/link"
 
 const packages = [
   {
     title: "Starter",
-    link: "#",
     cost: {perMonth: "$15", perYear: "$12"},
     details: "All you need to begin.",
     perks: [
@@ -17,7 +15,6 @@ const packages = [
   },
   {
     title: "Standard",
-    link: "#",
     cost: {perMonth: "$30", perYear: "$24"},
     details:
       "Includes everything in Starter, plus crucial resources to expand your venture.",
@@ -31,7 +28,6 @@ const packages = [
   },
   {
     title: "Expansion",
-    link: "#",
     cost: {perMonth: "$60", perYear: "$48"},
     details:
       "Everything in Standard, enhanced with teamwork capabilities and in-depth data analysis.",
@@ -86,11 +82,7 @@ export function PricingDemo() {
                 <p className="mt-3 text-sm leading-6 text-secondary-foreground">
                   {tier.cost.perYear} per month if paid annually
                 </p>
-                <Button asChild>
-                  <Link href={tier.link} className="mt-10 w-full">
-                    Buy plan
-                  </Link>
-                </Button>
+                <Button className="mt-10 w-full">Buy plan</Button>
                 <p className="mt-10 text-sm font-semibold leading-6 text-secondary-foreground">
                   {tier.details}
                 </p>

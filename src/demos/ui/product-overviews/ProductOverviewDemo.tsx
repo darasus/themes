@@ -149,7 +149,7 @@ export function ProductOverviewDemo() {
             <div className="mt-6">
               <div className="space-y-6 text-base">{product.description}</div>
             </div>
-            <form className="mt-6">
+            <div className="mt-6">
               <div>
                 <h3 className="mb-2 text-sm">Color</h3>
                 <RadioGroup
@@ -188,7 +188,7 @@ export function ProductOverviewDemo() {
                   Add to favorites
                 </Button>
               </div>
-            </form>
+            </div>
             <section aria-labelledby="details-heading" className="mt-12">
               <Accordion type="single" collapsible className="w-full">
                 {product.details.map((detail) => {
