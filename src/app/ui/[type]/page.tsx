@@ -6,12 +6,13 @@ import {FeaturesDemo} from "@/demos/ui/features/FeaturesDemo"
 import {PricingDemo} from "@/demos/ui/pricing/PricingDemo"
 import {HeroDemo} from "@/demos/ui/hero/HeroDemo"
 import {Tabs, TabsList, TabsTrigger} from "@/components/ui/tabs"
-import {FC, Fragment} from "react"
+import {FC} from "react"
 import {SignInFormDemo} from "@/demos/ui/authentication/SignInFormDemo"
-import {ProductOverviewDemo} from "@/demos/ui/product-overviews/ProductOverviewDemo"
+import {ProductOverviewDemo} from "@/demos/ui/ecommerce/product-overviews/ProductOverviewDemo"
 import Link from "next/link"
 import {useParams} from "next/navigation"
 import {Label} from "@/components/ui/label"
+import {ProductGridDemo} from "@/demos/ui/ecommerce/product-lists/ProductGrid"
 
 type ItemTypes = "page-sections" | "application-ui" | "ecommerce"
 
@@ -25,6 +26,11 @@ const items: {title: string; demo: FC; type: ItemTypes}[] = [
     demo: ProductOverviewDemo,
     type: "ecommerce",
   },
+  {
+    title: "Product grid",
+    demo: ProductGridDemo,
+    type: "ecommerce",
+  },
 ]
 
 export default function UIPage() {
@@ -34,12 +40,12 @@ export default function UIPage() {
   const elements = items
     .filter((item) => item.type === type)
     .map((item) => (
-      <Fragment key={item.title}>
-        <Label className="text-lg">{item.title}</Label>
+      <div key={item.title} className="space-y-4">
+        <Label className="text-2xl">{item.title}</Label>
         <ComponentPreview>
           <item.demo />
         </ComponentPreview>
-      </Fragment>
+      </div>
     ))
 
   return (
@@ -57,9 +63,7 @@ export default function UIPage() {
           </TabsTrigger>
         </TabsList>
       </Tabs>
-      <div className="pt-4">
-        <div className="space-y-2">{elements}</div>
-      </div>
+      <div className="flex flex-col gap-8 pt-4">{elements}</div>
     </Container>
   )
 }

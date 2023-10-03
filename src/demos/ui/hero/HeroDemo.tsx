@@ -3,7 +3,7 @@ import {Button} from "@/components/ui/button"
 export function HeroDemo() {
   return (
     <div className="mx-auto max-w-3xl py-32 sm:py-48 lg:py-56">
-      <div className="flex sm:mb-8 sm:justify-center">
+      <div className="mb-8 flex justify-center">
         <div className="flex items-center gap-1 rounded-full px-4 py-1 text-xs leading-6 ring-1 ring-primary/30 duration-1000 animate-in hover:ring-primary/70">
           Easy NextJS integration.{" "}
           <Button
